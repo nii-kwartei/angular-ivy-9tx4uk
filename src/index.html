@@ -1,1 +1,18 @@
 <my-app>loading</my-app>
+<script>
+  console.log("Script");
+
+  sendStartupEvents();
+
+  function sendStartupEvents(){
+    let initEvent = { type: 'initialized', data: null};
+    this.sendEvent(initEvent);
+
+    let sizeEvent = { type: 'sizeChange', data: { height: 50}};
+    this.sendEvent(sizeEvent);
+  }
+
+  function sendEvent(event, origin="*"){
+    window.parent.postMessage(event, origin)
+  }
+</script>
